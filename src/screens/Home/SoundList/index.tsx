@@ -6,7 +6,7 @@ import sounds from "../../../constants/sounds";
 export default function Soundlist() {
   return (
     <FlatList
-      contentContainerStyle={{ paddingHorizontal: 32 }}
+      contentContainerStyle={{ padding: 32 }}
       data={sounds}
       keyExtractor={(p) => p.fileName}
       renderItem={({ item }) => <SoundRow value={item} />}
