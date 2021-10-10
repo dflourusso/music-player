@@ -5,11 +5,13 @@ import { Container, Cover, Subtitle, Title } from "./styles";
 
 type SoundRow = {
   value: Sound;
+  active: boolean;
+  onPress?: () => void;
 };
 
-const SoundRow: React.FC<SoundRow> = ({ value }) => {
+const SoundRow: React.FC<SoundRow> = ({ value, active, onPress = () => {} }) => {
   return (
-    <Container>
+    <Container onPress={onPress} active={active}>
       <Cover source={require("../../../assets/cover.jpeg")} />
       <View>
         <Title>{value.title}</Title>

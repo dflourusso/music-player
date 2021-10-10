@@ -6,10 +6,10 @@ import sounds from "../../../constants/sounds";
 export default function Soundlist() {
   return (
     <FlatList
-      contentContainerStyle={{ padding: 32 }}
+      contentContainerStyle={{ paddingVertical: 32 }}
       data={sounds}
       keyExtractor={(p) => p.fileName}
-      renderItem={({ item }) => <SoundRow value={item} />}
+      renderItem={({ item, index }) => <SoundRow value={item} active={index === 3} />}
     />
   );
 }

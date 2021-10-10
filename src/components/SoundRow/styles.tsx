@@ -2,10 +2,17 @@ import React from "react";
 import styled from "styled-components/native";
 import { theme } from "../../constants/theme";
 
-export const Container = styled.View`
+interface IContainer {
+  active: boolean;
+}
+
+export const Container = styled.TouchableOpacity<IContainer>`
   flex-direction: row;
   padding-top: 20px;
   padding-bottom: 20px;
+  padding-left: 32px;
+  padding-right: 32px;
+  background-color: ${({ active }) => active ? theme.background.secondary : theme.background.primary };
 `;
 
 export const Title = styled.Text`
