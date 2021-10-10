@@ -1,15 +1,16 @@
-import React from 'react'
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 import BackButton from '../../../components/Buttons/BackButton'
 import NextButton from '../../../components/Buttons/NextButton'
 import PauseButton from '../../../components/Buttons/PauseButton'
 import PlayButton from '../../../components/Buttons/PlayButton'
-import { useAppDispatch } from '../../../hooks'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { playerActions } from '../../../store/ducks/player'
+import { millisToMinutesAndSeconds } from '../../../utils/time'
 import { Container, Content, ProgressText } from './styles'
 
 const SoundControls: React.FC = () => {
   const dispatch = useAppDispatch()
+  const progress = useAppSelector((state) => state.playerReducer.soundProgress)
 
   const pause = useCallback(() => {
     dispatch(playerActions.pause())
@@ -21,11 +22,16 @@ const SoundControls: React.FC = () => {
 
   return (
     <Container>
-      <ProgressText>02:36</ProgressText>
+      <ProgressText>
+        {millisToMinutesAndSeconds(progress?.positionMillis ?? 0)}
+      </ProgressText>
       <Content>
         <BackButton />
-        <PlayButton onPress={play} />
-        <PauseButton onPress={pause} />
+        {progress?.isPlaying ? (
+          <PauseButton onPress={pause} />
+        ) : (
+          <PlayButton onPress={play} />
+        )}
         <NextButton />
       </Content>
     </Container>

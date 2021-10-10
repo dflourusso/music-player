@@ -1,7 +1,7 @@
 import { Audio } from 'expo-av'
-import { call, put, select, takeEvery } from 'redux-saga/effects'
+import { END, eventChannel } from 'redux-saga'
+import { call, fork, put, select, take, takeEvery } from 'redux-saga/effects'
 import { RootState } from '..'
-import { Sound } from '../../constants/sounds'
 import * as audio from '../../utils/audio'
 import { playerActions } from '../ducks/player'
 
@@ -31,7 +31,6 @@ export function* initSound(action: any) {
     action.payload
   )) as Audio.Sound
   if (audioSound) {
-    console.log(action.payload)
     yield put(
       playerActions.setSound({
         id: action.payload.fileName,
@@ -39,6 +38,35 @@ export function* initSound(action: any) {
       })
     )
   }
+}
+
+function progressEmitter(audioSound: Audio.Sound) {
+  return eventChannel((emit) => {
+    audioSound.setOnPlaybackStatusUpdate(emit)
+    return () => {
+      emit(END)
+    }
+  })
+}
+
+function* progressListener(channel: any) {
+  const audioSound = (yield select(
+    audioSoundSelector
+  )) as audioSoundSelectorType
+
+  while (audioSound) {
+    const data = yield take(channel)
+    yield put(playerActions.setSoundProgress(data))
+  }
+}
+
+function* trackProgress() {
+  const audioSound = (yield select(
+    audioSoundSelector
+  )) as audioSoundSelectorType
+  if (!audioSound) return
+  const emitter = progressEmitter(audioSound)
+  yield fork(progressListener, emitter)
 }
 
 export function* play() {
@@ -62,6 +90,7 @@ export function* pause() {
 export default function* playerSaga() {
   yield takeEvery(playerActions.initSound.type, initSound)
   yield takeEvery(playerActions.setSound.type, play)
+  yield takeEvery(playerActions.setSound.type, trackProgress)
   yield takeEvery(playerActions.play.type, play)
   yield takeEvery(playerActions.pause.type, pause)
 }
