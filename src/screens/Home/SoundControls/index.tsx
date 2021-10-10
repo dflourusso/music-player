@@ -10,6 +10,9 @@ import { Container, Content, ProgressText } from './styles'
 
 const SoundControls: React.FC = () => {
   const dispatch = useAppDispatch()
+  const currentPlayingSoundId = useAppSelector(
+    (state) => state.playerReducer.currentPlayingSound?.id
+  )
   const progress = useAppSelector((state) => state.playerReducer.soundProgress)
 
   const pause = useCallback(() => {
@@ -39,7 +42,7 @@ const SoundControls: React.FC = () => {
         {progress?.isPlaying ? (
           <PauseButton onPress={pause} />
         ) : (
-          <PlayButton onPress={play} />
+          <PlayButton onPress={play} disabled={!currentPlayingSoundId} />
         )}
         <NextButton onPress={next} />
       </Content>

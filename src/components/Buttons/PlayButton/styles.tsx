@@ -10,6 +10,7 @@ export const Container = styled.TouchableOpacity`
   border-color: ${theme.foregorund.secondary};
   justify-content: center;
   align-items: center;
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `
 
 export const Icon = styled(Ionicons).attrs(() => ({
