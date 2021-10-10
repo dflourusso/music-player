@@ -31,7 +31,8 @@ const SoundControls: React.FC = () => {
   return (
     <Container>
       <ProgressText>
-        {millisToMinutesAndSeconds(progress?.positionMillis ?? 0)}
+        {millisToMinutesAndSeconds(progress?.positionMillis ?? 0)} -{' '}
+        {millisToMinutesAndSeconds(progress?.durationMillis ?? 0)}
       </ProgressText>
       <Content>
         <BackButton onPress={back} />

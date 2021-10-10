@@ -1,6 +1,6 @@
-import { Ionicons } from "@expo/vector-icons";
-import styled from "styled-components/native";
-import { theme } from "../../../constants/theme";
+import { Ionicons } from '@expo/vector-icons'
+import styled from 'styled-components/native'
+import { theme } from '../../../constants/theme'
 
 export const Container = styled.TouchableOpacity`
   width: 60px;
@@ -10,12 +10,12 @@ export const Container = styled.TouchableOpacity`
   border-color: ${theme.foregorund.secondary};
   justify-content: center;
   align-items: center;
-`;
+`
 
 export const Icon = styled(Ionicons).attrs(() => ({
-  name: "ios-play-sharp",
+  name: 'ios-play-sharp',
   size: 40,
   color: theme.foregorund.primary,
 }))`
-  left: 4px;
-`;
+  left: 3px;
+`
