@@ -28,5 +28,5 @@ export const Cover = styled.Image`
   border-radius: 6px;
   width: 40px;
   height: 40px;
-  margin-right: 16;
+  margin-right: 16px;
 `;
