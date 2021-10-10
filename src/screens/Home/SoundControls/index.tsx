@@ -20,19 +20,27 @@ const SoundControls: React.FC = () => {
     dispatch(playerActions.play())
   }, [dispatch])
 
+  const back = useCallback(() => {
+    dispatch(playerActions.back())
+  }, [dispatch])
+
+  const next = useCallback(() => {
+    dispatch(playerActions.next())
+  }, [dispatch])
+
   return (
     <Container>
       <ProgressText>
         {millisToMinutesAndSeconds(progress?.positionMillis ?? 0)}
       </ProgressText>
       <Content>
-        <BackButton />
+        <BackButton onPress={back} />
         {progress?.isPlaying ? (
           <PauseButton onPress={pause} />
         ) : (
           <PlayButton onPress={play} />
         )}
-        <NextButton />
+        <NextButton onPress={next} />
       </Content>
     </Container>
   )

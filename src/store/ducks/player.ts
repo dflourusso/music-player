@@ -22,6 +22,8 @@ const setSoundProgress = createAction<AVPlaybackStatus>(
 )
 const play = createAction<void>('sounds/play')
 const pause = createAction<void>('sounds/pause')
+const back = createAction<void>('sounds/back')
+const next = createAction<void>('sounds/next')
 
 export const playerActions = {
   setSounds,
@@ -30,6 +32,8 @@ export const playerActions = {
   setSoundProgress,
   play,
   pause,
+  back,
+  next,
 }
 
 const initialState: PlayerState = {
