@@ -41,7 +41,6 @@ const SoundControls: React.FC = () => {
 
   const setPosition = useCallback(
     (millis: number) => {
-      console.log(millis);
       dispatch(playerActions.setPosition(millis));
       play();
     },
