@@ -136,6 +136,13 @@ export function* setPosition(action: any) {
   yield call([audioSound, audioSound.setPositionAsync], action.payload);
 }
 
+export function* onComplete(action: any) {
+  const { didJustFinish } = action.payload;
+  if (didJustFinish) {
+    yield put(playerActions.next());
+  }
+}
+
 export default function* playerSaga() {
   yield takeEvery(playerActions.initSound.type, initSound);
   yield takeEvery(playerActions.setSound.type, play);
@@ -145,4 +152,5 @@ export default function* playerSaga() {
   yield takeEvery(playerActions.back.type, back);
   yield takeEvery(playerActions.next.type, next);
   yield takeEvery(playerActions.setPosition.type, setPosition);
+  yield takeEvery(playerActions.setSoundProgress.type, onComplete);
 }
