@@ -1,29 +1,30 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
-import { Audio, AVPlaybackStatus } from 'expo-av'
-import { PlaybackStatus } from '../../constants/sound'
-import { Sound } from '../../constants/sounds'
+import { createAction, createReducer } from "@reduxjs/toolkit";
+import { Audio, AVPlaybackStatus } from "expo-av";
+import { PlaybackStatus } from "../../constants/sound";
+import { Sound } from "../../constants/sounds";
 
 export type CurrentPlayingSoundType = {
-  id: Sound['fileName']
-  audioSound: Audio.Sound
-}
+  id: Sound["fileName"];
+  audioSound: Audio.Sound;
+};
 
 interface PlayerState {
-  sounds: Sound[]
-  currentPlayingSound?: CurrentPlayingSoundType
-  soundProgress?: PlaybackStatus
+  sounds: Sound[];
+  currentPlayingSound?: CurrentPlayingSoundType;
+  soundProgress?: PlaybackStatus;
 }
 
-const setSounds = createAction<Sound[]>('sounds/setSounds')
-const initSound = createAction<Sound>('sounds/initSound')
-const setSound = createAction<CurrentPlayingSoundType>('sounds/setSound')
+const setSounds = createAction<Sound[]>("sounds/setSounds");
+const initSound = createAction<Sound>("sounds/initSound");
+const setSound = createAction<CurrentPlayingSoundType>("sounds/setSound");
 const setSoundProgress = createAction<AVPlaybackStatus>(
-  'sounds/setSoundProgress'
-)
-const play = createAction<void>('sounds/play')
-const pause = createAction<void>('sounds/pause')
-const back = createAction<void>('sounds/back')
-const next = createAction<void>('sounds/next')
+  "sounds/setSoundProgress"
+);
+const play = createAction<void>("sounds/play");
+const pause = createAction<void>("sounds/pause");
+const back = createAction<void>("sounds/back");
+const next = createAction<void>("sounds/next");
+const setPosition = createAction<number>("sounds/setPosition");
 
 export const playerActions = {
   setSounds,
@@ -34,13 +35,14 @@ export const playerActions = {
   pause,
   back,
   next,
-}
+  setPosition,
+};
 
 const initialState: PlayerState = {
   sounds: [],
   currentPlayingSound: undefined,
   soundProgress: undefined,
-}
+};
 
 export const playerReducer = createReducer(initialState, {
   [setSounds.type]: (state, { payload }) => ({
@@ -51,12 +53,12 @@ export const playerReducer = createReducer(initialState, {
     return {
       ...state,
       currentPlayingSound: payload,
-    }
+    };
   },
   [setSoundProgress.type]: (state, { payload }) => {
     return {
       ...state,
       soundProgress: payload,
-    }
+    };
   },
-})
+});

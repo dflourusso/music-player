@@ -14,9 +14,23 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const ProgressText = styled.Text`
-  color: ${theme.foregorund.secondary};
+export const ProgressContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   margin-bottom: 32px;
+`;
+
+export const ProgressLeft = styled.Text`
+  position: absolute;
+  left: 0;
+  color: ${theme.foregorund.secondary};
   font-size: 18px;
-  align-self: center;
+`;
+
+export const ProgressRight = styled.Text`
+  position: absolute;
+  right: 0;
+  color: ${theme.foregorund.secondary};
+  font-size: 18px;
 `;
