@@ -6,10 +6,7 @@ type SoundControlsType = {
   disabled?: boolean
 }
 
-const PlayButton: React.FC<SoundControlsType> = ({
-  onPress = () => {},
-  disabled = false,
-}) => {
+const PlayButton: React.FC<SoundControlsType> = ({ onPress = () => {}, disabled = false }) => {
   return (
     <Container onPress={onPress} disabled={disabled}>
       <Icon />

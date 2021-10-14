@@ -1,18 +1,16 @@
-import React from "react";
-import {
-  Container, Icon
-} from "./styles";
+import React from 'react'
+import { Container, Icon } from './styles'
 
 type SoundControlsType = {
   onPress?: () => void
 }
 
-const BackButton: React.FC<SoundControlsType> = ({onPress = () => {}}) => {
+const BackButton: React.FC<SoundControlsType> = ({ onPress = () => {} }) => {
   return (
-        <Container onPress={onPress}>
-          <Icon />
-        </Container>
-  );
-};
+    <Container onPress={onPress}>
+      <Icon />
+    </Container>
+  )
+}
 
-export default BackButton;
+export default BackButton

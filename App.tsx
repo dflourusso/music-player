@@ -1,9 +1,9 @@
-import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { Provider } from 'react-redux';
-import { theme } from "./src/constants/theme";
-import Home from "./src/screens/Home";
-import { store } from './src/store';
+import React from 'react'
+import { SafeAreaView, StyleSheet } from 'react-native'
+import { Provider } from 'react-redux'
+import { theme } from './src/constants/theme'
+import Home from './src/screens/Home'
+import { store } from './src/store'
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
         <Home />
       </SafeAreaView>
     </Provider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.background.primary,
   },
-});
+})

@@ -8,9 +8,7 @@ import { playerActions } from '../../../store/ducks/player'
 export default function Soundlist() {
   const dispatch = useAppDispatch()
   const sounds = useAppSelector((state) => state.playerReducer.sounds)
-  const currentPlayingSoundId = useAppSelector(
-    (state) => state.playerReducer.currentPlayingSound?.id
-  )
+  const currentPlayingSoundId = useAppSelector((state) => state.playerReducer.currentPlayingSound?.id)
 
   useEffect(() => {
     dispatch(playerActions.setSounds(SoundCollection))
