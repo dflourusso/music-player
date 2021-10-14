@@ -5,7 +5,7 @@ type SoundControlsType = {
   onPress?: () => void;
 };
 
-const PauseButton: React.FC<SoundControlsType> = ({ onPress = () => {} }) => {
+const ReplayButton: React.FC<SoundControlsType> = ({ onPress = () => {} }) => {
   return (
     <Container onPress={onPress}>
       <Icon />
@@ -13,4 +13,4 @@ const PauseButton: React.FC<SoundControlsType> = ({ onPress = () => {} }) => {
   );
 };
 
-export default PauseButton;
+export default ReplayButton;

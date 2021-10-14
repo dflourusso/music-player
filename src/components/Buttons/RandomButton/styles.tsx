@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { theme } from "../../../constants/theme";
 
@@ -8,8 +8,7 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const Icon = styled(Ionicons).attrs(() => ({
-  name: "play-skip-forward-sharp",
+export const Icon = styled(FontAwesome).attrs(() => ({
+  name: "random",
   size: 24,
-  color: theme.foregorund.light,
 }))``;

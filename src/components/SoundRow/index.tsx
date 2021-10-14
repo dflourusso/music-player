@@ -9,7 +9,11 @@ type SoundRow = {
   onPress?: () => void;
 };
 
-const SoundRow: React.FC<SoundRow> = ({ value, active, onPress = () => {} }) => {
+const SoundRow: React.FC<SoundRow> = ({
+  value,
+  active,
+  onPress = () => {},
+}) => {
   return (
     <Container onPress={onPress} active={active}>
       <Cover source={require("../../../assets/cover.jpeg")} />

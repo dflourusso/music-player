@@ -1,17 +1,15 @@
 import React from "react";
-import {
-  Container, Icon
-} from "./styles";
+import { Container, Icon } from "./styles";
 
 type SoundControlsType = {
-  onPress?: () => void
-}
+  onPress?: () => void;
+};
 
-const NextButton: React.FC<SoundControlsType> = ({onPress = () => {}}) => {
+const NextButton: React.FC<SoundControlsType> = ({ onPress = () => {} }) => {
   return (
-        <Container onPress={onPress}>
-          <Icon />
-        </Container>
+    <Container onPress={onPress}>
+      <Icon />
+    </Container>
   );
 };
 

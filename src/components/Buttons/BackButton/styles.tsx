@@ -11,6 +11,5 @@ export const Container = styled.TouchableOpacity`
 export const Icon = styled(Ionicons).attrs(() => ({
   name: "play-skip-back-sharp",
   size: 24,
-  color: theme.foregorund.secondary,
-}))`
-`;
+  color: theme.foregorund.light,
+}))``;

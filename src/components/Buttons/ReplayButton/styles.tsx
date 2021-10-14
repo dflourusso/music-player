@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { theme } from "../../../constants/theme";
 
@@ -8,8 +8,8 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const Icon = styled(Ionicons).attrs(() => ({
-  name: "play-skip-forward-sharp",
-  size: 24,
+export const Icon = styled(MaterialIcons).attrs(() => ({
+  name: "replay",
+  size: 28,
   color: theme.foregorund.light,
 }))``;
