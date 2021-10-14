@@ -26,6 +26,9 @@ const back = createAction<void>("sounds/back");
 const next = createAction<void>("sounds/next");
 const setPosition = createAction<number>("sounds/setPosition");
 
+const random = createAction<void>("sounds/random");
+const replay = createAction<void>("sounds/replay");
+
 export const playerActions = {
   setSounds,
   initSound,
@@ -36,6 +39,8 @@ export const playerActions = {
   back,
   next,
   setPosition,
+  random,
+  replay,
 };
 
 const initialState: PlayerState = {

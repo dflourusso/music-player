@@ -127,6 +127,30 @@ export function* next() {
   yield put(playerActions.initSound(audioSound));
 }
 
+export function* replay() {
+  const audioSound = (yield select(
+    audioSoundSelector
+  )) as audioSoundSelectorType;
+
+  if (!audioSound) return;
+  yield call([audioSound, audioSound.replayAsync]);
+}
+
+export function* random() {
+  const currentPlayingSound = (yield select(
+    currentPlayingSoundSelector
+  )) as currentPlayingSoundSelectorType;
+  const sounds = (yield select(soundsSelector)) as soundsSelectorType;
+  const index = sounds.findIndex((p) => p.fileName === currentPlayingSound?.id);
+  let numberMusic = sounds.length;
+  const randomIndex = Math.floor(Math.random() * numberMusic);
+  const audioSound = sounds[randomIndex];
+
+  if (!audioSound) return;
+
+  yield put(playerActions.initSound(audioSound));
+}
+
 export function* setPosition(action: any) {
   const audioSound = (yield select(
     audioSoundSelector
@@ -134,13 +158,6 @@ export function* setPosition(action: any) {
 
   if (!audioSound) return;
   yield call([audioSound, audioSound.setPositionAsync], action.payload);
-}
-
-export function* onComplete(action: any) {
-  const { didJustFinish } = action.payload;
-  if (didJustFinish) {
-    yield put(playerActions.next());
-  }
 }
 
 export default function* playerSaga() {
@@ -151,6 +168,7 @@ export default function* playerSaga() {
   yield takeEvery(playerActions.pause.type, pause);
   yield takeEvery(playerActions.back.type, back);
   yield takeEvery(playerActions.next.type, next);
+  yield takeEvery(playerActions.replay.type, replay);
+  yield takeEvery(playerActions.random.type, random);
   yield takeEvery(playerActions.setPosition.type, setPosition);
-  yield takeEvery(playerActions.setSoundProgress.type, onComplete);
 }

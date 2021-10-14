@@ -1,9 +1,12 @@
 import Slider from "@react-native-community/slider";
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import BackButton from "../../../components/Buttons/BackButton";
 import NextButton from "../../../components/Buttons/NextButton";
 import PauseButton from "../../../components/Buttons/PauseButton";
 import PlayButton from "../../../components/Buttons/PlayButton";
+import RandomButton from "../../../components/Buttons/RandomButton";
+import ReplayButton from "../../../components/Buttons/ReplayButton";
+
 import { theme } from "../../../constants/theme";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { playerActions } from "../../../store/ducks/player";
@@ -17,10 +20,14 @@ import {
 } from "./styles";
 
 const SoundControls: React.FC = () => {
+  const [selected, setSelected] = useState(false);
+
   const dispatch = useAppDispatch();
+
   const currentPlayingSoundId = useAppSelector(
     (state) => state.playerReducer.currentPlayingSound?.id
   );
+
   const progress = useAppSelector((state) => state.playerReducer.soundProgress);
 
   const pause = useCallback(() => {
@@ -39,6 +46,14 @@ const SoundControls: React.FC = () => {
     dispatch(playerActions.next());
   }, [dispatch]);
 
+  const random = useCallback(() => {
+    dispatch(playerActions.random());
+  }, [dispatch]);
+
+  const replay = useCallback(() => {
+    dispatch(playerActions.replay());
+  }, [dispatch]);
+
   const setPosition = useCallback(
     (millis: number) => {
       dispatch(playerActions.setPosition(millis));
@@ -47,6 +62,15 @@ const SoundControls: React.FC = () => {
     [dispatch]
   );
 
+  const selectedButton = () => {
+    setSelected(!selected);
+  };
+
+  useEffect(() => {
+    if (progress?.didJustFinish) {
+      selected ? random() : next();
+    }
+  }, [selected, progress?.didJustFinish]);
   return (
     <Container>
       <ProgressContainer>
@@ -58,7 +82,7 @@ const SoundControls: React.FC = () => {
           minimumValue={0}
           value={progress?.positionMillis ?? 0}
           maximumValue={progress?.durationMillis ?? 0}
-          minimumTrackTintColor={theme.foregorund.secondary}
+          minimumTrackTintColor={theme.foregorund.lightBlue}
           maximumTrackTintColor={theme.foregorund.secondary}
           thumbTintColor={theme.foregorund.primary}
           onSlidingStart={pause}
@@ -69,6 +93,7 @@ const SoundControls: React.FC = () => {
         </ProgressRight>
       </ProgressContainer>
       <Content>
+        <ReplayButton onPress={replay} />
         <BackButton onPress={back} />
         {progress?.isPlaying ? (
           <PauseButton onPress={pause} />
@@ -76,6 +101,7 @@ const SoundControls: React.FC = () => {
           <PlayButton onPress={play} disabled={!currentPlayingSoundId} />
         )}
         <NextButton onPress={next} />
+        <RandomButton onPress={selectedButton} selected={selected} />
       </Content>
     </Container>
   );

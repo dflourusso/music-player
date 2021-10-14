@@ -1,10 +1,10 @@
-import React from 'react'
-import { Container, Icon } from './styles'
+import React from "react";
+import { Container, Icon } from "./styles";
 
 type SoundControlsType = {
-  onPress?: () => void
-  disabled?: boolean
-}
+  onPress?: () => void;
+  disabled?: boolean;
+};
 
 const PlayButton: React.FC<SoundControlsType> = ({
   onPress = () => {},
@@ -14,7 +14,7 @@ const PlayButton: React.FC<SoundControlsType> = ({
     <Container onPress={onPress} disabled={disabled}>
       <Icon />
     </Container>
-  )
-}
+  );
+};
 
-export default PlayButton
+export default PlayButton;

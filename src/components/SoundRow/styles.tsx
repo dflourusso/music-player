@@ -12,7 +12,8 @@ export const Container = styled.TouchableOpacity<IContainer>`
   padding-bottom: 20px;
   padding-left: 32px;
   padding-right: 32px;
-  background-color: ${({ active }) => active ? theme.background.secondary : theme.background.primary };
+  background-color: ${({ active }) =>
+    active ? theme.background.secondary : theme.background.primary};
 `;
 
 export const Title = styled.Text`
